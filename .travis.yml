@@ -41,6 +41,7 @@ jobs:
     - arch: arm64
       name: build-image-and-k8s-integration-test
       before_install:
+        - service docker status
         #- make travis-setup
         #- make minikube-setup
       script:
