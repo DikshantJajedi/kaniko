@@ -27,6 +27,7 @@ jobs:
       name: build-image-and-k8s-integration-test
       before_install:
         - make travis-setup
+        - swapoff -a
         - echo 'Environment="KUBELET_EXTRA_ARGS=--fail-swap-on=false"' > /etc/systemd/system/kubelet.service.d/90-local-extras.conf
         - systemctl daemon-reload
         - systemctl restart kubelet
