@@ -24,7 +24,7 @@ else
   arch1="amd64"
   echo $arch1
 fi
-curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/$arch1/kubectl
 chmod +x kubectl
 sudo mv kubectl /usr/local/bin/
 kubectl version --client
@@ -36,7 +36,7 @@ if ! conntrack --version &>/dev/null; then
   sudo apt-get -qq -y install conntrack
 fi
 
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-$arch1
 chmod +x minikube
 sudo mv minikube /usr/local/bin/
 
