@@ -45,7 +45,7 @@ sudo apt-get install -y liblz4-tool
 
 #echo 'Environment="KUBELET_EXTRA_ARGS=--fail-swap-on=false"' > /etc/systemd/system/kubelet.service.d/90-local-extras.conf
 sudo systemctl daemon-reload
-sudo systemctl restart kubelet
+#sudo systemctl restart kubelet
 sudo minikube start --vm-driver=none
 sudo minikube status
 sudo chown -R $USER $HOME/.kube $HOME/.minikube
