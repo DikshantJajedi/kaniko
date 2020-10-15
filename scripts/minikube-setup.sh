@@ -16,8 +16,14 @@
 set -ex
 
 arch=$(uname -m)
-echo $arch
-
+if [ "$(uname -m)" == "aarch64" ]
+then
+  arch1="arm64"
+  echo $arch1
+else
+  arch1="amd64"
+  echo $arch1
+fi
 curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 chmod +x kubectl
 sudo mv kubectl /usr/local/bin/
