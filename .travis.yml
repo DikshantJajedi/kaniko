@@ -27,7 +27,8 @@ jobs:
       name: build-image-and-k8s-integration-test
       before_install:
         - make travis-setup
-        - swapoff -a
+        - sudo cp config.toml /etc/containerd/config.toml
+        #- swapoff -a
         - make minikube-setup
       script:
         - make images
