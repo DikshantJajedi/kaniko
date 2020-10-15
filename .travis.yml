@@ -27,10 +27,10 @@ jobs:
       name: build-image-and-k8s-integration-test
       before_install:
         - make travis-setup
-        - sudo cp config.toml /etc/containerd/config.toml
-        - sudo cp daemon.json /etc/docker/daemon.json
-        #- sudo mkdir -p /etc/systemd/system/docker.service.d/docker.conf
-        #- sudo cp docker.conf /etc/systemd/system/docker.service.d/docker.conf
+        #- sudo cp config.toml /etc/containerd/config.toml
+        #- sudo cp daemon.json /etc/docker/daemon.json
+        - sudo mkdir -p /etc/systemd/system/docker.service.d/docker.conf
+        - sudo cp docker.conf /etc/systemd/system/docker.service.d/docker.conf
         - sudo apt-get install socat
         #- swapoff -a
         - make minikube-setup
