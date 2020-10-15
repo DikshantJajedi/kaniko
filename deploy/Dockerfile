@@ -15,21 +15,17 @@
 # Builds the static Go image to execute in a Kubernetes job
 
 FROM golang:1.14
-ARG TARGETARCH
-RUN echo "$TARGETARCH"
-ARG TARGETPLATFORM
-RUN echo "$TARGETPLATFORM"
-ARG GOARCH=amd64
+ARG GOARCH=arm64
 WORKDIR /go/src/github.com/GoogleContainerTools/kaniko
 # Get GCR credential helper
-ADD https://github.com/GoogleCloudPlatform/docker-credential-gcr/releases/download/v2.0.2/docker-credential-gcr_linux_amd64-2.0.2.tar.gz /usr/local/bin/
-RUN tar --no-same-owner -C /usr/local/bin/ -xvzf /usr/local/bin/docker-credential-gcr_linux_amd64-2.0.2.tar.gz
+ADD https://github.com/GoogleCloudPlatform/docker-credential-gcr/releases/download/v2.0.0/docker-credential-gcr_linux_amd64-2.0.0.tar.gz /usr/local/bin/
+RUN tar --no-same-owner -C /usr/local/bin/ -xvzf /usr/local/bin/docker-credential-gcr_linux_amd64-2.0.0.tar.gz
 # Get Amazon ECR credential helper
 RUN go get -u github.com/awslabs/amazon-ecr-credential-helper/ecr-login/cli/docker-credential-ecr-login
-RUN make -C /go/src/github.com/awslabs/amazon-ecr-credential-helper linux-amd64
+RUN make -C /go/src/github.com/awslabs/amazon-ecr-credential-helper linux-arm64
 # ACR docker credential helper
-ADD https://aadacr.blob.core.windows.net/acr-docker-credential-helper/docker-credential-acr-linux-amd64.tar.gz /usr/local/bin
-RUN tar --no-same-owner -C /usr/local/bin/ -xvzf /usr/local/bin/docker-credential-acr-linux-amd64.tar.gz
+#ADD https://aadacr.blob.core.windows.net/acr-docker-credential-helper/docker-credential-acr-linux-amd64.tar.gz /usr/local/bin
+#RUN tar --no-same-owner -C /usr/local/bin/ -xvzf /usr/local/bin/docker-credential-acr-linux-amd64.tar.gz
 # Add .docker config dir
 RUN mkdir -p /kaniko/.docker
 
