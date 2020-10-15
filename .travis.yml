@@ -1,6 +1,6 @@
 language: go
 os: linux
-dist: bionic
+dist: focal
 
 env:
   global:
@@ -26,29 +26,18 @@ jobs:
     - arch: amd64
       name: build-image-and-k8s-integration-test
       before_install:
-        - service docker status
-        - wget https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/docker-ce_18.06.0~ce~3-0~ubuntu_amd64.deb
-        - sudo apt-get purge -y docker.io
-        - sudo apt-get autoclean
-        - sudo dpkg -i docker-ce_18.06.0~ce~3-0~ubuntu_amd64.deb
-        - sudo docker version
-        - service docker status
         - make travis-setup
         - make minikube-setup
       script:
         - make images
         - make push
         - make integration-test-k8s
-    - arch: arm64
+    - dist: focal
+      virt: vm
+      group: edge
+      arch: arm64-graviton2
       name: build-image-and-k8s-integration-test
       before_install:
-        - service docker status
-        - wget https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/arm64/docker-ce_18.06.0~ce~3-0~ubuntu_arm64.deb
-        - sudo apt-get purge -y docker.io
-        - sudo apt-get autoclean
-        - sudo dpkg -i docker-ce_18.06.0~ce~3-0~ubuntu_arm64.deb
-        - sudo docker version
-        - service docker status
         #- make travis-setup
         - make minikube-setup
       script:
