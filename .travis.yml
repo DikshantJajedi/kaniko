@@ -42,7 +42,6 @@ jobs:
       name: build-image-and-k8s-integration-test
       before_install:
         - service docker status
-        #- make travis-setup
       script:
         - make images
         - make push
