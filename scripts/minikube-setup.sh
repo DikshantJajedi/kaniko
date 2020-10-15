@@ -43,7 +43,7 @@ sudo mv minikube /usr/local/bin/
 sudo apt-get update
 sudo apt-get install -y liblz4-tool
 
-echo 'Environment="KUBELET_EXTRA_ARGS=--fail-swap-on=false"' > /etc/systemd/system/kubelet.service.d/90-local-extras.conf
+#echo 'Environment="KUBELET_EXTRA_ARGS=--fail-swap-on=false"' > /etc/systemd/system/kubelet.service.d/90-local-extras.conf
 sudo systemctl daemon-reload
 sudo systemctl restart kubelet
 sudo minikube start --vm-driver=none
