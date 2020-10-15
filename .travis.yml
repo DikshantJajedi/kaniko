@@ -43,7 +43,6 @@ jobs:
       before_install:
         - service docker status
         #- make travis-setup
-        #- make minikube-setup
       script:
         - make images
         - make push
