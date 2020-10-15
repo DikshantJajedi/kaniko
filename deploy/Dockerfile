@@ -15,8 +15,10 @@
 # Builds the static Go image to execute in a Kubernetes job
 
 FROM golang:1.14
-RUN echo "$TARGETARCH"
-RUN echo "$TARGETPLATFORM"
+ARG TARGETARCH
+RUN echo $TARGETARCH
+ARG TARGETPLATFORM
+RUN echo $TARGETPLATFORM
 ARG GOARCH=amd64
 WORKDIR /go/src/github.com/GoogleContainerTools/kaniko
 # Get GCR credential helper
